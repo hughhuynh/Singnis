@@ -27,7 +27,8 @@ public class YakBakActivity extends Activity {
 		private AudioRecord recorder = null;
 		private Thread recordingThread = null;
 		private boolean isRecording = false;
-
+		String filePath = "/sdcard/voice8K16bitmono.pcm";
+		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 		    super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class YakBakActivity extends Activity {
 		}
 
 		private void setButtonHandlers() {
-		    ((Button) findViewById(R.id.btnPlay)).setOnClickListener(btnClick);
+		    ((Button) findViewById(R.id.btnRecord)).setOnClickListener(btnClick);
 		    ((Button) findViewById(R.id.btnStop)).setOnClickListener(btnClick);
 		}
 
@@ -53,7 +54,7 @@ public class YakBakActivity extends Activity {
 		}
 
 		private void enableButtons(boolean isRecording) {
-		    enableButton(R.id.btnPlay, !isRecording);
+		    enableButton(R.id.btnRecord, !isRecording);
 		    enableButton(R.id.btnStop, isRecording);
 		}
 
@@ -97,7 +98,7 @@ public class YakBakActivity extends Activity {
 		private void writeAudioDataToFile() {
 		    // Write the output audio in byte
 
-		    String filePath = "/sdcard/voice8K16bitmono.pcm";
+		    
 		    short sData[] = new short[BufferElements2Rec];
 
 		    FileOutputStream os = null;
@@ -147,7 +148,7 @@ public class YakBakActivity extends Activity {
 		private View.OnClickListener btnClick = new View.OnClickListener() {
 		    public void onClick(View v) {
 		        switch (v.getId()) {
-		        case R.id.btnPlay: {
+		        case R.id.btnRecord: {
 		            enableButtons(true);
 		            startRecording();
 		            break;
@@ -156,6 +157,13 @@ public class YakBakActivity extends Activity {
 		            enableButtons(false);
 		            stopRecording();
 		            break;
+		        }
+		        case R.id.btnPlay: {
+		        	try {
+		        		PlayShortAudioFileViaAudioTrack(filePath);
+		        	} catch (IOException e) {
+		        		e.printStackTrace();
+		        	}
 		        }
 		        }
 		    }
