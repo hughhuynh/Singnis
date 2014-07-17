@@ -1,6 +1,9 @@
-package com.app.yakbak;
+package com.app.singnis;
 
 import java.io.IOException;
+
+import com.app.yakbak.R;
+
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -12,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class YakBakActivity extends Activity {
+public class SingnisActivity extends Activity {
 
    private MediaRecorder myRecorder;
    private MediaPlayer myPlayer;
@@ -26,12 +29,12 @@ public class YakBakActivity extends Activity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_yak_bak);
+      setContentView(R.layout.activity_singnis);
       
       text = (TextView) findViewById(R.id.text1);
       // store it to sd card
       outputFile = Environment.getExternalStorageDirectory().
-    		  getAbsolutePath() + "/javacodegeeksRecording.3gpp";
+    		  getAbsolutePath() + "/singnis.3gpp";
 
       myRecorder = new MediaRecorder();
       myRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
